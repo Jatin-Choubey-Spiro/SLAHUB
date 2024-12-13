@@ -6,7 +6,7 @@ import PGAgreement from "./partners/PG";
 import zyppAgreement from "./partners/zypp";
 import defaultAgreement from "./partners/default";
 import SpiroAgreementManager from './build/contracts/SpiroAgreementManager.json'; // Replace with your actual ABI JSON
-const CONTRACT_ADDRESS = "0x4C45Ef8269Aa22f8fFa4Cbb6D03e12e671adC98C"; // Replace with deployed contract address
+const CONTRACT_ADDRESS = "0x87e86Ad6727f0683006e74684fCA8e346e92Aa23"; // Replace with deployed contract address
 
 const App = () => {
   const [web3, setWeb3] = useState(null);
@@ -19,8 +19,8 @@ const App = () => {
   const [agreementDetails, setAgreementDetails] = useState(null);
   const [message, setMessage] = useState("");
   const [currentAgreementText, setCurrentAgreementText] = useState("");
-  const [party1Address, setParty1Address] = useState("");
-  const [party1Signed, setParty1Signed] = useState(false);
+  const [partnerAddress, setpartnerAddress] = useState("");
+  const [partnerSigned, setpartnerSigned] = useState(false);
 
   // Initialize Web3 and Contract
   useEffect(() => {
@@ -81,13 +81,13 @@ const App = () => {
       const signers = details[2]; // List of signer addresses
       const party1 = signers[0] || "Not Assigned";
 
-      setParty1Address(party1);
+      setpartnerAddress(party1);
 
       const party1HasSigned = party1 !== "Not Assigned"
         ? await contract.methods.hasSignerSigned(agreementId, party1).call()
         : false;
 
-      setParty1Signed(party1HasSigned);
+      setpartnerSigned(party1HasSigned);
       setAgreementDetails({
         hash: details[0],
         ipfsCID: details[1],
@@ -134,8 +134,8 @@ const App = () => {
       const receipt = await contract.methods.signAgreement(agreementId).send({ from: account });
 
       // Update the signing status for Party 1 or Party 2
-      if (account.toLowerCase() === party1Address.toLowerCase()) {
-        setParty1Signed(true);
+      if (account.toLowerCase() === partnerAddress.toLowerCase()) {
+        setpartnerSigned(true);
       }
 
       setMessage(`Signed agreement successfully! Transaction hash: ${receipt.transactionHash}`);
@@ -212,8 +212,8 @@ const App = () => {
           <p className="agreement-text"><strong>IPFS CID:</strong> {agreementDetails.ipfsCID}</p>
           <p className="agreement-text"><strong>Is Complete:</strong> {agreementDetails.isComplete ? "Yes" : "No"}</p>
 
-          <p className="agreement-text"><strong>Party 1 Address:</strong> {party1Address}</p>
-          <p className="agreement-text"><strong>Party 1 Signed:</strong> {party1Signed ? "Yes" : "No"}</p>
+          <p className="agreement-text"><strong>Party 1 Address:</strong> {partnerAddress}</p>
+          <p className="agreement-text"><strong>Party 1 Signed:</strong> {partnerSigned ? "Yes" : "No"}</p>
 
           {/* Display Agreement Text */}
           <div className="agreement-text-section">

@@ -38,9 +38,9 @@ contract SpiroAgreementManager {
 
         // Add signers and initialize signing status
         for (uint256 i = 0; i < _signers.length; i++) {
-            agreement.signers.push(_signers[i]);
-            agreement.hasSigned[_signers[i]] = false;
-        }
+        agreements[agreementId].signers.push(_signers[i]);
+        agreements[agreementId].hasSigned[_signers[i]] = false;
+    }
 
         agreementCount++;
         emit AgreementCreated(agreementId, _ipfsCID, _agreementHash);
