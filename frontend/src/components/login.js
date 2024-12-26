@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './login.css';
 import spiroLogo from './logos/spiro.png';
-import rapidoLogo from './logos/rapido.png';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [gasPrice, setGasPrice] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,11 +22,9 @@ const Login = ({ onLogin }) => {
     <div className="login-container">
       <div className="login-card">
         <h1 className="login-title">
-          <img src={spiroLogo} alt="Spiro Logo" className="logo-left" />
           Hey There
-          <img src={rapidoLogo} alt="Rapido Logo" className="logo-right" />
         </h1>
-        <p className="login-subtitle">Sign in to continue to Spiro-Rapido DApp</p>
+        <p className="login-subtitle">Sign In</p>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="username">Username</label>

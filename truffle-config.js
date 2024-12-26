@@ -1,7 +1,8 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 require('dotenv').config();
-module.exports = {
+const getGasPrice = require('./utils/gasPrice');
 
+module.exports = {
   networks: {
     ganacheUI: {
       host: "127.0.0.1",
@@ -9,9 +10,9 @@ module.exports = {
       network_id: "*",
     },
     ganacheCLI: {
-     host: "127.0.0.1",     // Localhost (default: none)
-     port: 8545,            // Standard Ethereum port (default: none)
-     network_id: "*",       // Any network (default: none)
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
     },
     sepolia: {
       provider: () =>
@@ -20,7 +21,7 @@ module.exports = {
           process.env.SEPOLIA_RPC_URL,
         ),
       network_id: 11155111, // 11155111
-      confirmations: 3,   // Number of confirmations to wait between deployments
+      confirmations: 10,   // Number of confirmations to wait between deployments
       timeoutBlocks: 200, // Number of blocks before a deployment times out
       skipDryRun: false,   // Skip dry run before migrations
     },
@@ -30,11 +31,11 @@ module.exports = {
           process.env.PRIVATE_KEY,
           process.env.HOLESKY_RPC_URL
         ),
-        network_id: 17000, // 17000
-        confirmations: 3,
-        networkCheckTimeout: 10000,
-        timeoutBlocks: 200,
-        skipDryRun: false,
+      network_id: 17000, // 17000
+      confirmations: 3,
+      networkCheckTimeout: 10000,
+      timeoutBlocks: 200,
+      skipDryRun: false,
     }
   },
 
@@ -53,7 +54,7 @@ module.exports = {
     }
   },
   plugins: ['truffle-plugin-verify'],
-    api_keys: {
-      etherscan: process.env.ETHERSCAN_API_KEY
-    },
-  };
+  api_keys: {
+    etherscan: process.env.ETHERSCAN_API_KEY
+  },
+};

@@ -240,20 +240,35 @@
 
 
 import React, { useState } from 'react';
+import axios from 'axios';
 import Login from './components/login';
 import Home from './components/home';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [price, setPrice] = useState(null);
 
   const handleLogin = () => {
     setIsAuthenticated(true);
   };
 
+  const fetchPrice = async () => {
+    try {
+      const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+      setPrice(response.data.ethereum.usd);
+    } catch (error) {
+      console.error('Error fetching the price:', error);
+    }
+  };
+
   return (
     <div className="App">
       {isAuthenticated ? (
-        <Home />
+        <div>
+          <Home />
+          <button onClick={fetchPrice}>Show Sepolia testETH Price</button>
+          {price && <p>Current Sepolia testETH Price: ${price}</p>}
+        </div>
       ) : (
         <Login onLogin={handleLogin} />
       )}

@@ -4,9 +4,10 @@ import './App.css';
 import rapidoAgreement from "./partners/rapido"; // Agreement with Rapido
 import PGAgreement from "./partners/PG";
 import zyppAgreement from "./partners/zypp";
+// import newAgreement from "./partners/newVendor";
 import defaultAgreement from "./partners/default";
 import SpiroAgreementManager from './build/contracts/SpiroAgreementManager.json'; // Replace with your actual ABI JSON
-const CONTRACT_ADDRESS = "0x87e86Ad6727f0683006e74684fCA8e346e92Aa23"; // Replace with deployed contract address
+const CONTRACT_ADDRESS = "0xEDA98830Dcce0111E5a0431E0e81cd6a2acFa87A"; // Replace with deployed contract address
 
 const App = () => {
   const [web3, setWeb3] = useState(null);
@@ -210,10 +211,24 @@ const App = () => {
           <h4 className="agreement-title">Agreement Details:</h4>
           <p className="agreement-text"><strong>Hash:</strong> {agreementDetails.hash}</p>
           <p className="agreement-text"><strong>IPFS CID:</strong> {agreementDetails.ipfsCID}</p>
-          <p className="agreement-text"><strong>Is Complete:</strong> {agreementDetails.isComplete ? "Yes" : "No"}</p>
+          
+          <p className="agreement-text">
+            <strong>Is Complete:</strong>{" "}
+            <span style={{ color: agreementDetails.isComplete ? "green" : "red" }}>
+              {agreementDetails.isComplete ? "Yes" : "No"}
+            </span>
+          </p>
+          
+          <p className="agreement-text"><strong>Vendor's Address:</strong> {partnerAddress}</p>
+    
+          <p className="agreement-text">
+            <strong>Has Vendor Signed?:</strong>{" "}
+            <span style={{ color: partnerSigned ? "green" : "red" }}>
+              {partnerSigned ? "Yes" : "No"}
+            </span>
+          </p>
 
-          <p className="agreement-text"><strong>Party 1 Address:</strong> {partnerAddress}</p>
-          <p className="agreement-text"><strong>Party 1 Signed:</strong> {partnerSigned ? "Yes" : "No"}</p>
+
 
           {/* Display Agreement Text */}
           <div className="agreement-text-section">

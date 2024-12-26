@@ -13601,12 +13601,12 @@
     "11155111": {
       "events": {},
       "links": {},
-      "address": "0x87e86Ad6727f0683006e74684fCA8e346e92Aa23",
-      "transactionHash": "0xfa3f89fc3ec123add7d0bcef58d16819516b81fc0cb284d1187af2bcf416e6f5"
+      "address": "0xEDA98830Dcce0111E5a0431E0e81cd6a2acFa87A",
+      "transactionHash": "0x7a28ce9104cde543378798b8ef0e470d472eb47fc05dfb22cb4b7cee31d496f5"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-12-13T11:24:55.861Z",
+  "updatedAt": "2024-12-26T06:48:28.524Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
